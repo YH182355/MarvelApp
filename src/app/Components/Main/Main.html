@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marvel</title>
+</head>
+
+<body>
+  <nav class="navbar bg-body-tertiary" style="background-color: rgb(0, 0, 0);">
+    <div class="container-fluid row">
+      <div class="navbar-brand col-sm-8" style="color: white;">
+        <img src="../../../assets/MarvelLogo.png" alt="Logo" width="45" height="24"
+          class="d-inline-block align-text-top">
+        MarvelApp
+      </div>
+      <div class="navbar-brand col-sm-3 text-end">
+        <a href="Login" style="text-decoration: none; color: white;">
+          {{Usuario.Nombre}} <i class="bi bi-person-circle"></i>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <div id="fondo">
+    <nav>
+      <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button"
+          role="tab" aria-controls="nav-home" aria-selected="true">Comics</button>
+        <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button"
+          role="tab" aria-controls="nav-profile" aria-selected="false" (click)="verFav()">Favoritos</button>
+      </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab" tabindex="0">
+        <div class="tab">
+          <div>
+            <div class="row g-4">
+              <div *ngFor="let comic of comics" class="col-md-4">
+                <div class="card h-100 position-relative">
+                  <img *ngIf="comic.thumbnail" [src]="comic.thumbnail.path + '.' + comic.thumbnail.extension"
+                    class="card-img-top">
+                  <div *ngIf="!comic.thumbnail" class="card-img-top placeholder-img"></div>
+                  <div class="icon-overlay">
+                    <button style="background: none; border-style: none;" (click)="AgregarFav(comic)">
+                      <i *ngIf="!Usuario.ComicFav?.includes(comic.id)" class="bi bi-heart"></i>
+                      <i *ngIf="Usuario.ComicFav?.includes(comic.id)" class="bi bi-heart-fill"></i>
+                    </button>
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">{{ comic.title }}</h5>
+                    <p class="card-text">{{ comic.description }}</p>
+                    <a class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="getComicdetails(comic.id)">Ver detalles</a>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Apartado de favoritos -->
+  <div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab" tabindex="0">
+        <div style="background-color: aliceblue;">
+            <h4 style="padding-top: 5px; padding-left: 4px;">Tus comics favoritos</h4>
+            <div>
+              <div class="row g-4">
+                <div *ngFor="let x of comicsfav" class="col-md-4">
+                  <div class="card h-100 position-relative">
+                    <img *ngIf="x.thumbnail" [src]="x.thumbnail.path + '.' + x.thumbnail.extension"
+                      class="card-img-top">
+                    <div *ngIf="!x.thumbnail" class="card-img-top placeholder-img"></div>
+                    <div class="card-body">
+                      <h5 class="card-title">{{ x.title }}</h5>
+                      <p class="card-text">{{ x.description }}</p>
+                      <a class="btn btn-primary"  data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="getComicdetails(x.id)">Ver detalles</a>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+</div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">{{ comicdetails.title }}</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div>
+              <img *ngIf="comicdetails.thumbnail" [src]="comicdetails.thumbnail.path + '.' + comicdetails.thumbnail.extension"
+                class="card-img-top">
+                <!-- {{comicdetails.textObjects[0].text}} -->
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+
+</html>

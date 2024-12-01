@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogIn</title>
+</head>
+
+<body>
+    <main>
+        <div class="container">
+            <div class="form_area">
+                <p class="title">SIGN UP</p>
+                <div action="">
+                    <div class="form_group">
+                        <label class="sub_title" for="name">Name</label>
+                        <input placeholder="Enter your full name" class="form_style" type="text" [(ngModel)]="Usuario.Nombre">
+                    </div>
+                    <div class="form_group">
+                        <label class="sub_title" for="email">User</label>
+                        <input placeholder="Enter your username" id="user" class="form_style" type="text" [(ngModel)]="Usuario.Usuario">
+                    </div>
+                    <div class="form_group">
+                        <label class="sub_title" for="password">Password</label>
+                        <input placeholder="Enter your password" id="password" class="form_style" type="password" [(ngModel)]="Usuario.Password">
+                    </div>
+                    <div>
+                        <button class="btn" (click)="Registro()">SIGN UP</button>
+                        <p>Have an Account? <a class="link" href="Login">Login Here!</a></p><a class="link" href="Login">
+                        </a>
+                    </div><a class="link" href="">
+
+                    </a>
+                </div>
+            </div><a class="link" href="">
+            </a>
+        </div>
+    </main>
+</body>
+</html>
